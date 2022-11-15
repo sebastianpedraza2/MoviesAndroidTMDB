@@ -9,10 +9,22 @@ plugins {
 
 android {
     defaultConfig {
-        buildConfigField("String","API_KEY", "\"0266c46c25aa2fd93373aba4f48e0fe8\"")
+        buildConfigField("String","API_KEY", "\"59d84a3a4231ee9fb301ec9ed5d5b843\"")
     }
 }
 
 dependencies {
+
+    //Modules
     "implementation"(project(Modules.movieDomain))
+
+    //Retrofit
+    "implementation"(Retrofit.retrofit)
+    "implementation"(Retrofit.gsonConverter)
+    "implementation"(Retrofit.gson)
+
+    //Room
+    "kapt"(Room.roomCompiler)
+    "implementation"(Room.roomKtx)
+    "implementation"(Room.roomRuntime)
 }

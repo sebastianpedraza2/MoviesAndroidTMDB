@@ -21,4 +21,8 @@ dependencies {
     "api"(project(Modules.moviePresentation))
     "api"(project(Modules.movieData))
     "api"(project(Modules.movieDomain))
+
+    //Retrofit
+    "implementation"(Retrofit.retrofit)
+
 }
