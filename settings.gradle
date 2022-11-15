@@ -14,3 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MoviesAndroidTMDB"
 include ':app'
+include ':android-helpers'
+include ':core'
+include ':feature-movie'
+include ':kotlin-helpers'
+include ':feature-movie:movie-presentation'
+include ':feature-movie:movie-data'
+include ':feature-movie:movie-domain'
