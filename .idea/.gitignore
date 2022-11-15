@@ -4,3 +4,5 @@
 sonarlint
 gradle.xml
 misc.xml
+vcs.xml
+compiler.xml
