@@ -16,6 +16,15 @@ import com.pedraza.sebastian.movie_data.mappers.MovieListDtoMapper
 import com.pedraza.sebastian.movie_data.mappers.MovieOrmMapper
 import com.pedraza.sebastian.movie_data.repositories.MoviesRepositoryImpl
 import com.pedraza.sebastian.movie_domain.repositories.MoviesRepository
+import com.pedraza.sebastian.movie_domain.usecases.favorites.*
+import com.pedraza.sebastian.movie_domain.usecases.movie_detail.GetMovieDetailUseCase
+import com.pedraza.sebastian.movie_domain.usecases.movie_detail.GetMovieDetailUseCaseImpl
+import com.pedraza.sebastian.movie_domain.usecases.movie_list.GetMovieListUseCase
+import com.pedraza.sebastian.movie_domain.usecases.movie_list.GetMovieListUseCaseImpl
+import com.pedraza.sebastian.movie_domain.usecases.top_rated_movies.GetTopRatedMovieListUseCase
+import com.pedraza.sebastian.movie_domain.usecases.top_rated_movies.GetTopRatedMovieListUseCaseImpl
+import com.pedraza.sebastian.movie_domain.usecases.upcoming_movies.GetUpcomingMovieListUseCase
+import com.pedraza.sebastian.movie_domain.usecases.upcoming_movies.GetUpcomingMovieListUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -78,4 +87,31 @@ object MoviesModule {
         movieOrmMapper
     )
 
+    @Provides
+    fun provideGetMovieDetailUseCase(repository: MoviesRepository): GetMovieDetailUseCase =
+        GetMovieDetailUseCaseImpl(repository)
+
+    @Provides
+    fun provideSaveMovieToFavoritesUseCase(repository: MoviesRepository): SaveMovieToFavoritesUseCase =
+        SaveMovieToFavoritesUseCaseImpl(repository)
+
+    @Provides
+    fun provideDeleteMovieFromFavoritesUseCase(repository: MoviesRepository): DeleteMovieFromFavoritesUseCase =
+        DeleteMovieFromFavoritesUseCaseImpl(repository)
+
+    @Provides
+    fun provideGetAllMoviesFromFavoritesUseCase(repository: MoviesRepository): GetAllMoviesFromFavoritesUseCase =
+        GetAllMoviesFromFavoritesUseCaseImpl(repository)
+
+    @Provides
+    fun provideGetMovieListUseCase(repository: MoviesRepository): GetMovieListUseCase =
+        GetMovieListUseCaseImpl(repository)
+
+    @Provides
+    fun provideGetTopRatedMovieListUseCase(repository: MoviesRepository): GetTopRatedMovieListUseCase =
+        GetTopRatedMovieListUseCaseImpl(repository)
+
+    @Provides
+    fun provideGetUpcomingMovieListUseCase(repository: MoviesRepository): GetUpcomingMovieListUseCase =
+        GetUpcomingMovieListUseCaseImpl(repository)
 }
