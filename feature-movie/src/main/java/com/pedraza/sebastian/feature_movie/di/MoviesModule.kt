@@ -2,7 +2,12 @@ package com.pedraza.sebastian.feature_movie.di
 
 import android.app.Application
 import androidx.room.Room
+import com.pedraza.sebastian.feature_movie.BuildConfig
 import com.pedraza.sebastian.movie_data.api.MoviesService
+import com.pedraza.sebastian.movie_data.datasource.local.MoviesLocalDataSource
+import com.pedraza.sebastian.movie_data.datasource.local.MoviesLocalDataSourceImpl
+import com.pedraza.sebastian.movie_data.datasource.remote.MoviesRemoteDataSource
+import com.pedraza.sebastian.movie_data.datasource.remote.MoviesRemoteDataSourceImpl
 import com.pedraza.sebastian.movie_data.db.MovieDao
 import com.pedraza.sebastian.movie_data.db.MovieDatabase
 import com.pedraza.sebastian.movie_data.mappers.MovieDetailDtoMapper
@@ -41,4 +46,13 @@ object MoviesModule {
 
     @Provides
     fun provideMovieDetailMapper(): MovieDetailDtoMapper = MovieDetailDtoMapper()
+
+    @Provides
+    fun provideMoviesLocalDataSource(movieDao: MovieDao): MoviesLocalDataSource =
+        MoviesLocalDataSourceImpl(movieDao)
+
+    @Provides
+    fun provideMoviesRemoteDataSource(moviesService: MoviesService): MoviesRemoteDataSource =
+        MoviesRemoteDataSourceImpl(moviesService, BuildConfig.API_KEY)
+
 }
