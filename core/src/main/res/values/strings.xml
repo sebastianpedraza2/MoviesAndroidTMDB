@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MoviesAndroidTMDB</string>
+    <string name="something_went_wrong">Something went wrong, check your network!</string>
+</resources>

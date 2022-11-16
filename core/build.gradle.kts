@@ -4,5 +4,5 @@ apply {
 
 dependencies {
     "implementation"(project(Modules.androidHelpers))
-    "implementation"(project(Modules.featureMovie))
+//    "implementation"(project(Modules.featureMovie))
 }

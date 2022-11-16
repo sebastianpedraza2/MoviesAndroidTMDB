@@ -1,18 +1,9 @@
-plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-tasks.test {
-    useJUnitPlatform()
+apply {
+    from("$rootDir/base-module.gradle")
 }
 
 dependencies {
     "api"(project(Modules.kotlinHelpers))
+    "api"(project(Modules.core))
     "implementation"(Coroutines.coroutinesCore)
 }
