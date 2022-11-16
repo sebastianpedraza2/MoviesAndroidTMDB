@@ -6,6 +6,7 @@ dependencies {
 
     //Modules
     "implementation"(project(Modules.movieDomain))
+    "implementation"(project(Modules.core))
 
     //Retrofit
     "implementation"(Retrofit.retrofit)

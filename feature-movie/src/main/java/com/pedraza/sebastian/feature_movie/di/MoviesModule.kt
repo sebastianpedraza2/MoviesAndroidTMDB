@@ -12,7 +12,10 @@ import com.pedraza.sebastian.movie_data.db.MovieDao
 import com.pedraza.sebastian.movie_data.db.MovieDatabase
 import com.pedraza.sebastian.movie_data.mappers.MovieDetailDtoMapper
 import com.pedraza.sebastian.movie_data.mappers.MovieDtoMapper
+import com.pedraza.sebastian.movie_data.mappers.MovieListDtoMapper
 import com.pedraza.sebastian.movie_data.mappers.MovieOrmMapper
+import com.pedraza.sebastian.movie_data.repositories.MoviesRepositoryImpl
+import com.pedraza.sebastian.movie_domain.repositories.MoviesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,11 +51,31 @@ object MoviesModule {
     fun provideMovieDetailMapper(): MovieDetailDtoMapper = MovieDetailDtoMapper()
 
     @Provides
+    fun provideMovieListDtoMapper(movieDtoMapper: MovieDtoMapper): MovieListDtoMapper =
+        MovieListDtoMapper(movieDtoMapper)
+
+    @Provides
     fun provideMoviesLocalDataSource(movieDao: MovieDao): MoviesLocalDataSource =
         MoviesLocalDataSourceImpl(movieDao)
 
     @Provides
     fun provideMoviesRemoteDataSource(moviesService: MoviesService): MoviesRemoteDataSource =
         MoviesRemoteDataSourceImpl(moviesService, BuildConfig.API_KEY)
+
+    @Singleton
+    @Provides
+    fun providesMoviesRepository(
+        moviesRemoteDataSource: MoviesRemoteDataSource,
+        moviesLocalDataSource: MoviesLocalDataSource,
+        movieListDtoMapper: MovieListDtoMapper,
+        movieDetailDtoMapper: MovieDetailDtoMapper,
+        movieOrmMapper: MovieOrmMapper
+    ): MoviesRepository = MoviesRepositoryImpl(
+        moviesRemoteDataSource,
+        moviesLocalDataSource,
+        movieListDtoMapper,
+        movieDetailDtoMapper,
+        movieOrmMapper
+    )
 
 }
