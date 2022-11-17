@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.pedraza.sebastian.moviesandroidtmdb">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".MoviesApplication"
         android:allowBackup="true"

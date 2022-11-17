@@ -52,7 +52,6 @@ android {
 
 dependencies {
     implementation(Compose.compiler)
-    implementation(Compose.ui)
     implementation(Compose.uiToolingPreview)
     implementation(Compose.hiltNavigationCompose)
     implementation(Compose.material)
@@ -66,11 +65,12 @@ dependencies {
 
     implementation(project(Modules.core))
     implementation(project(Modules.kotlinHelpers))
+    implementation(project(Modules.featureMovie))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
 
-    implementation(Coil.coilCompose)
+    implementation(Ui.coilCompose)
 
     implementation(Google.material)
 

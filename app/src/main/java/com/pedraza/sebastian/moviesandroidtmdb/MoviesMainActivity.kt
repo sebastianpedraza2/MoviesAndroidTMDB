@@ -11,7 +11,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.pedraza.sebastian.core.navigation.Route
+import com.pedraza.sebastian.core.navigation.Routes
+import com.pedraza.sebastian.movie_presentation.movie_list.MovieListScreen
+import com.pedraza.sebastian.moviesandroidtmdb.navigation.navigate
 import com.pedraza.sebastian.moviesandroidtmdb.ui.theme.MoviesAndroidTMDBTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,10 +26,18 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
 
-                Scaffold(modifier = Modifier.fillMaxSize(),
-                scaffoldState = scaffoldState) {
-                    NavHost(navController = navController, startDestination = Route.ONBOARDING){
-                        composable(Route.ONBOARDING){
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    scaffoldState = scaffoldState
+                ) {
+                    NavHost(navController = navController, startDestination = Routes.MOVIE_LIST) {
+                        composable(Routes.MOVIE_LIST) {
+                            MovieListScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
+                        }
+                        composable(Routes.MOVIE_DETAIL) {
 
                         }
                     }
@@ -37,15 +47,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MoviesAndroidTMDBTheme {
-        Greeting("Android")
     }
 }

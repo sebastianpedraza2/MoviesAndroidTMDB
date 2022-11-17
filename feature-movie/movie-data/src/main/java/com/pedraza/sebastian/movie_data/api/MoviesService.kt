@@ -21,13 +21,13 @@ interface MoviesService {
         @Query("api_key") apiKey: String
     ): Response<MovieDetailDto>
 
-    @GET("/movie/top_rated")
+    @GET("movie/top_rated")
     suspend fun getTopRatedMovies(
         @Query("api_key") apiKey: String,
         @Query("page") page: Int
     ): Response<MovieListDto>
 
-    @GET("/movie/upcoming")
+    @GET("movie/upcoming")
     suspend fun getUpcomingMovies(
         @Query("api_key") apiKey: String,
         @Query("page") page: Int

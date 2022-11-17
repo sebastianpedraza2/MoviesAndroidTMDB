@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">MoviesAndroidTMDB</string>
     <string name="something_went_wrong">Something went wrong, check your network!</string>
+    <string name="loading">Loading…</string>
+    <string name="no_filter">No filter</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="filter_by">Filter By:</string>
+    <string name="rating">Rating: %1$s</string>
 </resources>
