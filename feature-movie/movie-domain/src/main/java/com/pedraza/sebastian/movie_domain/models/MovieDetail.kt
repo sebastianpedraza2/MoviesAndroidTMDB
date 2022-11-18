@@ -1,11 +1,15 @@
 package com.pedraza.sebastian.movie_domain.models
 
+import com.pedraza.sebastian.kotlin_helpers.Constants
+
 data class MovieDetail(
-    val id: Int,
-    val name: String,
-    val date: String,
-    val overview: String,
-    val time: Int,
-    val score: Double,
-    val thumbnail: String?
-)
+    val id: Int = 0,
+    val name: String = "",
+    val date: String = "",
+    val overview: String = "",
+    val time: Int? = null,
+    val score: Double = 0.0,
+    val thumbnail: String? = null
+){
+    fun getCompleteThumbnailUrl() = "${Constants.THUMBNAIL_URL}$thumbnail"
+}

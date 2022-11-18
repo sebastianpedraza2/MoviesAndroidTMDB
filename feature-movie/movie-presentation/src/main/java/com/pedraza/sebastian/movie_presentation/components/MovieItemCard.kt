@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,12 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import coil.size.Scale
 import com.pedraza.sebastian.core.dimensions.LocalSpacing
-import com.pedraza.sebastian.core.navigation.Routes
-import com.pedraza.sebastian.core.utils.UiEvent
 import com.pedraza.sebastian.movie_domain.models.Movie
 import com.pedraza.sebastian.core.R
 import com.pedraza.sebastian.movie_presentation.movie_list.MovieListEvent
@@ -37,7 +35,7 @@ fun MovieItemCard(
     modifier: Modifier = Modifier,
     movie: Movie,
     isFavorite: Boolean,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNavigateToMovieDetail: (Int) -> Unit,
     onFavoritePressed: (MovieListEvent) -> Unit,
 ) {
     val spacing = LocalSpacing.current
@@ -50,7 +48,7 @@ fun MovieItemCard(
             )
             .fillMaxWidth()
             .height(140.dp)
-            .clickable { onNavigate(UiEvent.Navigate(Routes.MOVIE_DETAIL)) },
+            .clickable { onNavigateToMovieDetail(movie.id) },
         shape = RoundedCornerShape(spacing.spaceSmall),
         elevation = spacing.spaceExtraSmall
     )
@@ -63,22 +61,20 @@ fun MovieItemCard(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
-                Image(
-                    painter = rememberAsyncImagePainter(
-                        ImageRequest.Builder(context)
-                            .data(data = movie.getCompleteThumbnailUrl())
-                            .apply(block = fun ImageRequest.Builder.() {
-                                scale(Scale.FIT)
-                                placeholder(R.drawable.movie_placeholder)
-                            }).build()
-                    ),
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(data = movie.getCompleteThumbnailUrl())
+                        .crossfade(true)
+                        .build(),
+                    placeholder = painterResource(id = R.drawable.movie_placeholder),
                     contentDescription = movie.overview,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .weight(55f, fill = false)
+                        .width(spacing.spacing150dp)
+                        .height(spacing.spacing100dp)
+                        .padding(spacing.spaceExtraSmall)
                         .clip(RoundedCornerShape(spacing.spaceExtraSmall))
                 )
-
                 Column(
                     verticalArrangement = Arrangement.SpaceEvenly,
                     horizontalAlignment = Start,
@@ -134,7 +130,7 @@ fun MovieItemCard(
 private fun MovieItemPreview() {
     MovieItemCard(
         movie = Movie(name = "Avengers", date = "02/03/2022", isFavorite = true),
-        isFavorite = true, onNavigate = {}) {
+        isFavorite = true, onNavigateToMovieDetail = {}) {
 
     }
 }

@@ -49,7 +49,6 @@ fun MovieListScreen(
             is MovieListUiState.MovieListFetched -> MovieListContent(
                 movieList = uiState.value.movieList,
                 filterMoviesBy = uiState.value.filterBy,
-                onNavigate = onNavigate,
                 viewModel = viewModel
             )
             is MovieListUiState.Init -> {

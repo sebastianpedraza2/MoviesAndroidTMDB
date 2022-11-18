@@ -7,4 +7,5 @@
     <string name="upcoming">Upcoming</string>
     <string name="filter_by">Filter By:</string>
     <string name="rating">Rating: %1$s</string>
+    <string name="time_minutes">Time: %1$s Minutes"</string>
 </resources>

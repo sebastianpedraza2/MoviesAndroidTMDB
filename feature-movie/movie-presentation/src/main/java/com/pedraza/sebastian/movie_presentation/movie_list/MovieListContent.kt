@@ -16,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.pedraza.sebastian.core.R
 import com.pedraza.sebastian.core.dimensions.LocalSpacing
-import com.pedraza.sebastian.core.utils.UiEvent
 import com.pedraza.sebastian.movie_domain.models.Movie
 import com.pedraza.sebastian.movie_presentation.components.ItemLoadingBox
 import com.pedraza.sebastian.movie_presentation.components.MovieItemCard
@@ -27,7 +26,6 @@ import com.pedraza.sebastian.movie_presentation.components.SelectableButton
 fun MovieListContent(
     movieList: List<Movie>,
     filterMoviesBy: FilterMoviesBy,
-    onNavigate: (UiEvent.Navigate) -> Unit,
     viewModel: MovieListViewModel
 ) {
     val listState = rememberLazyListState()
@@ -95,7 +93,9 @@ fun MovieListContent(
                 MovieItemCard(
                     movie = movie,
                     isFavorite = movie.isFavorite,
-                    onNavigate = onNavigate
+                    onNavigateToMovieDetail = { id ->
+                        viewModel.onNavigateToMovieDetail(id)
+                    }
                 ) {
                     viewModel.onMovieListEvent(
                         MovieListEvent.OnFavoritePressed(movie)
