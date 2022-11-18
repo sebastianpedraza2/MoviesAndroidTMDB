@@ -2,6 +2,7 @@ package com.pedraza.sebastian.movie_presentation.movie_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pedraza.sebastian.core.navigation.Routes
 import com.pedraza.sebastian.core.utils.Result
 import com.pedraza.sebastian.core.utils.UiEvent
 import com.pedraza.sebastian.movie_domain.models.Movie
@@ -83,9 +84,16 @@ class MovieListViewModel @Inject constructor(
                 }
                 is Result.Error -> {
                     _uiEvent.send(UiEvent.ShowSnackBar(response.message))
+                    _uiState.update { currentState -> currentState.copy(movieListUiState = MovieListUiState.MovieListFetched) }
                 }
             }
             _uiState.update { currentState -> currentState.copy(nextPage = currentState.nextPage.inc()) }
+        }
+    }
+
+    fun onNavigateToMovieDetail(id: Int) {
+        viewModelScope.launch(dispatcher) {
+            _uiEvent.send(UiEvent.Navigate("${Routes.MOVIE_DETAIL}/${id}"))
         }
     }
 
