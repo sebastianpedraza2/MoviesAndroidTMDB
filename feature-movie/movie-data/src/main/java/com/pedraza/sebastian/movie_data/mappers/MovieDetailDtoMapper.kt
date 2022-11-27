@@ -10,11 +10,11 @@ class MovieDetailDtoMapper : EntityMapper<MovieDetailDto, MovieDetail> {
             return MovieDetail(
                 id = id,
                 name = title,
-                date = releaseDate,
-                overview = overview,
-                score = voteAverage,
-                thumbnail = backdropPath,
-                time = runtime
+                date = releaseDate.orEmpty(),
+                overview = overview.orEmpty(),
+                score = voteAverage ?: 0.0,
+                thumbnail = backdropPath.orEmpty(),
+                time = runtime ?: 0
             )
         }
     }

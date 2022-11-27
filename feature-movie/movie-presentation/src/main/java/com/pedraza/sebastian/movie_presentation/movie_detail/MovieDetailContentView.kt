@@ -39,7 +39,7 @@ fun MovieDetailContentView(movieDetail: MovieDetail) {
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ) {
-            if (!movieDetail.thumbnail.isNullOrEmpty()) {
+            if (movieDetail.thumbnail.isNotEmpty()) {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(movieDetail.getCompleteThumbnailUrl())
@@ -89,10 +89,10 @@ fun MovieDetailContentView(movieDetail: MovieDetail) {
                     fontWeight = FontWeight.SemiBold,
                 )
                 Text(
-                    text = if (movieDetail.time != null) stringResource(
+                    text = stringResource(
                         id = R.string.time_minutes,
                         movieDetail.time.toString()
-                    ) else ""
+                    )
                 )
             }
 
