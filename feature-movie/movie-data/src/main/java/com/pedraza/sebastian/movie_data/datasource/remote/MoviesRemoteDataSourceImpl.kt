@@ -1,6 +1,5 @@
 package com.pedraza.sebastian.movie_data.datasource.remote
 
-import com.pedraza.sebastian.movie_data.BuildConfig
 import com.pedraza.sebastian.movie_data.api.MoviesService
 import com.pedraza.sebastian.movie_data.entities.dto.MovieDetailDto
 import com.pedraza.sebastian.movie_data.entities.dto.MovieListDto

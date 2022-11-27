@@ -26,7 +26,7 @@ class MovieOrmMapper : EntityMapper<MovieOrm, Movie> {
                 releaseDate = date,
                 overview = overview,
                 voteAverage = score,
-                backdropPath = thumbnail ?: ""
+                backdropPath = thumbnail
             )
         }
     }

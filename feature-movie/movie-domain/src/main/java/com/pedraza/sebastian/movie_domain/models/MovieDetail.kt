@@ -7,9 +7,9 @@ data class MovieDetail(
     val name: String = "",
     val date: String = "",
     val overview: String = "",
-    val time: Int? = null,
+    val time: Int = 0,
     val score: Double = 0.0,
-    val thumbnail: String? = null
+    val thumbnail: String = ""
 ){
     fun getCompleteThumbnailUrl() = "${Constants.THUMBNAIL_URL}$thumbnail"
 }

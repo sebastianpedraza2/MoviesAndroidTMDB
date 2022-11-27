@@ -8,7 +8,7 @@ data class Movie(
     val date: String = "",
     val overview: String = "",
     val score: Double = 0.0,
-    val thumbnail: String? = "",
+    val thumbnail: String = "",
     var isFavorite: Boolean = false
 ) {
     fun getCompleteThumbnailUrl() = "${Constants.THUMBNAIL_URL}$thumbnail"

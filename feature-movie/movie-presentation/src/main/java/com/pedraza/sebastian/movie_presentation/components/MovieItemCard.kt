@@ -61,20 +61,22 @@ fun MovieItemCard(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                AsyncImage(
-                    model = ImageRequest.Builder(context)
-                        .data(data = movie.getCompleteThumbnailUrl())
-                        .crossfade(true)
-                        .build(),
-                    placeholder = painterResource(id = R.drawable.movie_placeholder),
-                    contentDescription = movie.overview,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .width(spacing.spacing150dp)
-                        .height(spacing.spacing100dp)
-                        .padding(spacing.spaceExtraSmall)
-                        .clip(RoundedCornerShape(spacing.spaceExtraSmall))
-                )
+                if (movie.thumbnail.isNotEmpty()) {
+                    AsyncImage(
+                        model = ImageRequest.Builder(context)
+                            .data(data = movie.getCompleteThumbnailUrl())
+                            .crossfade(true)
+                            .build(),
+                        placeholder = painterResource(id = R.drawable.movie_placeholder),
+                        contentDescription = movie.overview,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .width(spacing.spacing150dp)
+                            .height(spacing.spacing100dp)
+                            .padding(spacing.spaceExtraSmall)
+                            .clip(RoundedCornerShape(spacing.spaceExtraSmall))
+                    )
+                }
                 Column(
                     verticalArrangement = Arrangement.SpaceEvenly,
                     horizontalAlignment = Start,
